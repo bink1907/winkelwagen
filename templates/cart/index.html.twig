@@ -1,0 +1,29 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CartController!{% endblock %}
+
+{% block body %}
+    <div class="example-wrapper">
+        <h1>Winkelwagen</h1>
+        <table class="table col-12-md">
+            <thead>
+                 <tr>
+                    <td>Naam</td>
+                    <td>Aantal</td>
+                    <td>Prijs</td>
+                </tr>
+                 {% for product in Products %}
+
+            </thead>
+                <tr>
+                <td>{{ product.Product.naam }}</td>
+                <td>{{ product.aantal }}</td>
+                <td>{{ product.Product.prijs }}</td>
+                </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+
+{% endblock %}
