@@ -100,36 +100,16 @@ class ProductController extends AbstractController
         return $this->redirectToRoute('product_index');
     }
 
-//    /**
-//     * @Route("/{id}/add", name="product_add", methods={"GET","POST"})
-//     */
-//    public function add(Request $request, Product $product, $id): Response
-//    {
-//        $getCart = $this->session->get('Cart');
-//        if(isset($getCart[$id])) {
-//            $getCart[$id]['aantal']++;
-//        } else {
-//            $getCart[$id] = array('aantal' => 1);
-//        }
-//
-//        $this->session->set('Cart', $getCart);
-//
-//
-//        return $this->render('product/add.html.twig', [
-//
-//        ]);
-//    }
     /**
      * @Route("/{id}/add", name="product_add", methods={"GET","POST"})
      */
     public function add(Product $product, ProductRepository $productRepository): Response
     {
         $cart = $this->session->get('Cart');
-        $id = $product->getId();
-        if (isset($cart[$id])) {
-            $cart[$id]["aantal"]++;
+        if (isset($cart[$product->getId()])) {
+            $cart[$product->getId()]["aantal"]++;
         } else {
-            $cart[$id]["aantal"] = 1;
+            $cart[$product->getId()]["aantal"] = 1;
         }
         $this->session->set("Cart", $cart);
         return $this->redirectToRoute("cart");

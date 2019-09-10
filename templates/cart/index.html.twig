@@ -1,7 +1,7 @@
 
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CartController!{% endblock %}
+{% block title %}Cart {% endblock %}
 
 {% block body %}
     <div class="example-wrapper">
@@ -12,18 +12,36 @@
                     <td>Naam</td>
                     <td>Aantal</td>
                     <td>Prijs</td>
+                    <td>Totaalprijs</td>
                 </tr>
                  {% for product in Products %}
-
             </thead>
                 <tr>
                 <td>{{ product.Product.naam }}</td>
-                <td>{{ product.aantal }}</td>
-                <td>{{ product.Product.prijs }}</td>
+                    <td class="aantal">{{ product.aantal }}</td>
+                <td>€<span class="prijs">{{ product.Product.prijs }}</span></td>
+                    <td>€<span>{{ product.Product.prijs * product.aantal }}</span></td>
                 </tr>
             {% endfor %}
+            <tr ><th>Totaal: &euro; <span id="totaalprijs"></span></th></tr>
 
         </table>
+        <script>
+            let prijzen = document.getElementsByClassName('prijs');
+            let aantallen = document.getElementsByClassName('aantal');
+            let totaal = 0;
+
+            for (let x = 0; x < prijzen.length;x++){
+                const prijs = parseFloat(prijzen[x].innerText);
+                const aantal = parseFloat(aantallen[x].innerText);
+                totaal += prijs*aantal;
+            }
+
+            document.getElementById('totaalprijs').innerHTML=totaal.toFixed(2);
+
+        </script>
     </div>
+
+    <a href="/checkout"><button class="btn btn-warning">Check out</button></a>
 
 {% endblock %}

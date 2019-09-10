@@ -25,4 +25,20 @@ class CartController extends AbstractController
             'Products' => $Products,
         ]);
     }
+
+    public function add()
+    {
+        return $this->render('cart/index.twig.html', [
+                'controller_name' => 'CartController',
+    ]);
+    }
+
+    public function del()
+    {
+        return $this->render('cart/index.twig.html', [
+                'controller_name' => 'CartController',
+    ]);
+    }
+
+
 }
